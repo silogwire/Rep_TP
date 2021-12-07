@@ -8,7 +8,12 @@ node {
         }
 	 stage('Unit Tests') {
    
-   	 sh label: '', script: 'mvn test'
+   		 sh label: '', script: 'mvn test'
   	 }
+         stage('Integration Tests') {
+
+        	 sh label: '', script: 'mvn verify'
+         }
+
  }
 
