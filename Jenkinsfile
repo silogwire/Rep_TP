@@ -8,11 +8,11 @@ node {
         }
 	 stage('Unit Tests') {
 	      steps {
-   		 sh label: '', script: 'mvn test'
+   		 sh 'mvn test'
 		}
   	      post {
    		 always {
-    			 junit 'target/failsafe-reports/**/*.xml'
+    			 junit 'target/surefire-reports/**/*.xml'
     			}
 	        }
   	 }
