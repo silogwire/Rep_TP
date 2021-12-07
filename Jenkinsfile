@@ -46,11 +46,17 @@ pipeline {
 	}
 	stage('Code Quality Analysis') {
 		steps {
-				withSonarQubeEnv {	
 			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
-		}}
+		}
 	}
+	stage("Quality Gate") {
+  steps {
+    timeout(time: 1, unit: 'MINUTES') {
+        waitForQualityGate abortPipeline: true
+    }
+  }
+}
 }
 }
