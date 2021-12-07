@@ -7,12 +7,19 @@ node {
                 sh label: '', script: 'mvn clean compile'
         }
 	 stage('Unit Tests') {
-   
+	      steps {
    		 sh label: '', script: 'mvn test'
+		}
+  	      post {
+   		 always {
+    			 junit 'target/failsafe-reports/**/*.xml'
+    			}
+	        }
   	 }
+
          stage('Integration Tests') {
 
-        	 sh label: '', script: 'mvn verify'
+        	 sh label: '', script: 'mvn verify -Dsurefire.skip=true'
          }
 
  }
