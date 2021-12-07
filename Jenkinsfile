@@ -1,13 +1,20 @@
-node {
-
+pipeline {
+ agent any
         stage('Clone') {
-                git 'https://github.com/silogwire/Rep_TP.git'
-        }
+		steps {
+              		  git 'https://github.com/silogwire/Rep_TP.git'
+       		 }
+	}
         stage('Build') {
-                sh label: '', script: 'mvn clean compile'
-        }
+                steps {
+
+               		 sh 'mvn clean compile'
+       		 }
+	}
 	 stage('Unit Tests') {
-   		 sh label: '', script: 'mvn test'
+                steps {
+   			 sh 'mvn test'
+		}
   	      post {
    		 always {
     			 junit 'target/surefire-reports/**/*.xml'
@@ -16,9 +23,10 @@ node {
   	 }
 
          stage('Integration Tests') {
+                steps {
+	        	 sh label: '', script: 'mvn verify -Dsurefire.skip=true'
+        	 }
+	}
 
-        	 sh label: '', script: 'mvn verify -Dsurefire.skip=true'
-         }
-
- }
+}
 
