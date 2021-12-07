@@ -1,5 +1,9 @@
 pipeline {
  agent any
+   environment {
+  SONARQUBE_URL = "http://79.137.37.35"
+  SONARQUBE_PORT = "9000"
+	 }
     stages {
         stage('Clone') {
 		steps {
@@ -39,10 +43,9 @@ pipeline {
    			 }              
 		 }
 	}
-	stage('Code Quality Analysis') { 
+	stage('Code Quality Analysis') {
 		steps {
-			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=7feb11a80127b3e132ef98b518d67e4115959d1a'
-		        waitForQualityGate abortPipeline: true
+			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT -Dsonar.login=7feb11a80127b3e132ef98b518d67e4115959d1a'
 
 		}
  	}
