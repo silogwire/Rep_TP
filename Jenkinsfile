@@ -1,9 +1,9 @@
 pipeline {
  agent any
    environment {
-  SONARQUBE_URL = "http://79.137.37.35"
-  SONARQUBE_PORT = "9000"
-  SONARQUBE_LOGIN = "7feb11a80127b3e132ef98b518d67e4115959d1a"
+ 		 SONARQUBE_URL = "http://79.137.37.35"
+ 		 SONARQUBE_PORT = "9000"
+ 		 SONARQUBE_LOGIN = "7feb11a80127b3e132ef98b518d67e4115959d1a"
 	 }
     stages {
         stage('Clone') {
@@ -46,11 +46,11 @@ pipeline {
 	}
 	stage('Code Quality Analysis') {
 		steps {
-			withSonarQubeEnv(installationName: 'sonarqube_Hello', credentialsId: '$SONARQUBE_LOGIN')
+				withSonarQubeEnv(sonarqube_Hello: 'Production SonarQubeScanner', $SONARQUBE_LOGIN: 'SonarQubeToken') {	
 			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
-		}
+		}}
 	}
 }
 }
