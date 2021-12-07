@@ -41,7 +41,7 @@ pipeline {
 	}
 	stage('Code Quality Analysis') { 
 		steps {
-			sh mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=7feb11a80127b3e132ef98b518d67e4115959d1a
+			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello -Dsonar.host.url=http://79.137.37.35:9000 -Dsonar.login=7feb11a80127b3e132ef98b518d67e4115959d1a'
 		}
 		  post {
    			 always {
