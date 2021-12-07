@@ -1,5 +1,6 @@
 pipeline {
  agent any
+    stages {
         stage('Clone') {
 		steps {
               		  git 'https://github.com/silogwire/Rep_TP.git'
@@ -27,6 +28,6 @@ pipeline {
 	        	 sh label: '', script: 'mvn verify -Dsurefire.skip=true'
         	 }
 	}
-
-}
+     }
+}  
 
