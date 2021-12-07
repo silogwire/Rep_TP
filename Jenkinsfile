@@ -46,17 +46,11 @@ pipeline {
 	}
 	stage('Code Quality Analysis') {
 		steps {
+			withSonarQubeEnv(installationName: 'Production SonarQubeScanner', credentialsId: 'SonarQubeToken')
 			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
 		}
-		   post {
-    always {
-     // using warning next gen plugin
-     recordIssues aggregatingResults: true, tools: [javaDoc(), checkStyle(pattern: '**/target/checkstyle-result.xml'), findBugs(pattern: '**/target/findbugsXml.xml', useRankAsPriority: true), pmdParser(pattern: '**/target/pmd.xml')]
-    }
- 	}
-   	
-    }
+	}
 }
 }
