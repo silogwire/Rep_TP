@@ -46,7 +46,7 @@ pipeline {
 	}
 	stage('Code Quality Analysis') {
 		steps {
-				withSonarQubeEnv(sonarqube_Hello: 'Production SonarQubeScanner', $SONARQUBE_LOGIN: 'SonarQubeToken') {	
+				withSonarQubeEnv(installationName: 'sonarqube_Hello',credentialsId: '$SONARQUBE_LOGIN') {	
 			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
