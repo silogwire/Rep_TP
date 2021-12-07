@@ -46,11 +46,9 @@ pipeline {
 	}
 	stage('Code Quality Analysis') {
 		steps {
-                        withSonarQubeEnv('SonarCloudOne') {
 			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
-                        }
 		}
  	}
    	
