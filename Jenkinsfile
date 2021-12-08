@@ -44,13 +44,20 @@ pipeline {
    			 }              
 		 }
 	}
-	stage('Code Quality Analysis') {
-		steps {
-			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
-                                            -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
-                                            -Dsonar.login=$SONARQUBE_LOGIN'
-		}
-	}
+//	stage('Code Quality Analysis') {
+//		steps {
+//			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
+//                                            -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
+//                                            -Dsonar.login=$SONARQUBE_LOGIN'
+//		}
+//	}
+	stage ('Scan and Build Jar File') {
+            steps {
+               withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '4fd8209cf687e6680ec8636da75b4465c62c93c3') {
+                sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
 
     }
 }
