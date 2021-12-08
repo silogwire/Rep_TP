@@ -44,27 +44,27 @@ pipeline {
    			 }              
 		 }
 	}
-//	stage('Code Quality Analysis') {
-//		steps {
-//			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
-//                                            -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
-//                                            -Dsonar.login=$SONARQUBE_LOGIN'
-//		}
-//	}
-
-	stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'SonarQubeScanner'
-    }
-    steps {
-        withSonarQubeEnv('sonarqube') {
-                      sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_sonarqube_Hello  \
+	stage('Code Quality Analysis') {
+		steps {
+			sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_Hello \
                                             -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
                                             -Dsonar.login=$SONARQUBE_LOGIN'
+		}
+	}
 
-        }
-    }
-  }
+//	stage('Sonarqube') {
+//    environment {
+//        scannerHome = tool 'SonarQubeScanner'
+//    }
+//    steps {
+//        withSonarQubeEnv('sonarqube') {
+//                      sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_sonarqube_Hello  \
+//                                            -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
+//                                            -Dsonar.login=$SONARQUBE_LOGIN'
+//
+//        }
+//    }
+//  }
 
 }
 }
