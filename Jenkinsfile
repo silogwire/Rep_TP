@@ -51,18 +51,20 @@ pipeline {
 //                                            -Dsonar.login=$SONARQUBE_LOGIN'
 //		}
 //	}
-	stage('Sonarqube') { 
-    environnement { 
-        scannerHome = outil 'SonarQubeScanner' 
+
+	stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
     }
-    étapes { 
-        withSonarQubeEnv('sonarqube') { 
-            sh "${scannerHome}/bin/sonar-scanner" 
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
-        timeout(time : 10, unit : 'MINUTES') { 
-            waitForQualityGate abortPipeline : true 
-        } 
-    } 
-}
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
     }
+}
+
+}
 }
