@@ -52,7 +52,7 @@ pipeline {
 		}
 	}
 
-//	stage('Sonarqube') {
+///	stage('Sonarqube') {
 //    environment {
 //        scannerHome = tool 'SonarQubeScanner'
 //    }
