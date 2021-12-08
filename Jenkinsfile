@@ -63,9 +63,9 @@ pipeline {
                                             -Dsonar.login=$SONARQUBE_LOGIN'
 
         }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
+//        timeout(time: 10, unit: 'MINUTES') {
+//            waitForQualityGate abortPipeline: true
+//        }
     }
 }
 
