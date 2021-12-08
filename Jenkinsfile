@@ -58,7 +58,10 @@ pipeline {
     }
     steps {
         withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+                      sh 'mvn sonar:sonar -Dsonar.projectKey=sonarqube_sonarqube_Hello  \
+                                            -Dsonar.host.url=$SONARQUBE_URL:$SONARQUBE_PORT \
+                                            -Dsonar.login=$SONARQUBE_LOGIN'
+
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
