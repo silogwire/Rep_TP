@@ -23,7 +23,7 @@ pipeline {
 		}
 		post {
 		    always {
-    			 junit 'target/surefire-reports/**/*.xml'
+ //   			 junit 'target/surefire-reports/**/*.xml'
    		    }
 		}
   	 }
@@ -34,7 +34,7 @@ pipeline {
         	 }
 		 post {
 			 always {
-    				 junit 'target/failsafe-reports/**/*.xml'
+   // 				 junit 'target/failsafe-reports/**/*.xml'
    			 }
    			 success {
    				  stash(name: 'artifact', includes: 'target/*.jar')
@@ -51,13 +51,18 @@ pipeline {
 //                                            -Dsonar.login=$SONARQUBE_LOGIN'
 //		}
 //	}
-	stage ('Scan and Build Jar File') {
-            steps {
-               withSonarQubeEnv(installationName: 'sonarqube', credentialsId: '7feb11a80127b3e132ef98b518d67e4115959d1a') {
-                sh 'mvn clean package sonar:sonar'
-                }
-            }
+	stage('Sonarqube') { 
+    environnement { 
+        scannerHome = outil 'SonarQubeScanner' 
+    }
+    étapes { 
+        withSonarQubeEnv('sonarqube') { 
+            sh "${scannerHome}/bin/sonar-scanner" 
         }
-
+        timeout(time : 10, unit : 'MINUTES') { 
+            waitForQualityGate abortPipeline : true 
+        } 
+    } 
+}
     }
 }
