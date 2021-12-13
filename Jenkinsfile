@@ -42,8 +42,8 @@ pipeline {
    				  // to add artifacts in jenkins pipeline tab (UI)
    				  archiveArtifacts 'target/*.jar'
 //   			 }              
-//		 }
-//	}
+		 }
+	}
 
 //	stage('Code Quality Analysis') {
 //		steps {
