@@ -60,7 +60,7 @@ pipeline {
 //                      sh 'mvn clean package sonar:sonar -Dsonar.login=$SONARQUBE_LOGIN'
 
 //        }
-//    }
+///    }
 //  }
 
 }
