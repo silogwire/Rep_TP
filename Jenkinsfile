@@ -54,14 +54,14 @@ pipeline {
 //		}
 //	}
 
-	stage('Sonarqube') {
-	    steps {
-	        withSonarQubeEnv('sonarqube') {
-                      sh 'mvn clean package sonar:sonar -Dsonar.login=$SONARQUBE_LOGIN'
+//	stage('Sonarqube') {
+//	    steps {
+//	        withSonarQubeEnv('sonarqube') {
+//                      sh 'mvn clean package sonar:sonar -Dsonar.login=$SONARQUBE_LOGIN'
 
-        }
-    }
-  }
+//        }
+//    }
+//  }
 
 }
 }
