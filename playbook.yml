@@ -1,0 +1,17 @@
+---
+- name: deploiement de l'application 
+  hosts: servers
+  become: yes
+  tasks:
+          - name: copy artifacts .war
+            copy:
+                    src: ./target/*.war
+                    dest: /opt/tomcat/webapps
+            notify: restart_tomcat
+
+  handlers:
+           - name: restart_tomcat
+             command: sh /opt/tomcat/bin/shutdown.sh
+             command: sh /opt/tomcat/bin/startup.sh
+
+...
